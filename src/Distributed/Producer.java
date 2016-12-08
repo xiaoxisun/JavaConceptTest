@@ -17,7 +17,7 @@ public class Producer implements Runnable{
         try
         {
             Random rand = new Random();
-            int x=rand.nextInt(100);
+            int x=rand.nextInt(100000);
             System.out.println("producer enqueue number: "+x);
             for (int j=0;j<x;j++)
                 queue.enqueue(j+";");

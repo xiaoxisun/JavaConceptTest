@@ -24,12 +24,12 @@ public class BlockingQueue {
         while (this.queue.size()==this.limit)
         {
 
-            System.out.println("enqueue wait: queue size"+ this.queue.size());
+            System.out.println("enqueue wait: queue size "+ this.queue.size());
             wait();
         }
 
 
-        System.out.println("enqueue:" + item.toString());
+        System.out.println("enqueue: " + item.toString());
 
         this.queue.add(item);
 
@@ -40,17 +40,24 @@ public class BlockingQueue {
     public synchronized void dequeue()
         throws InterruptedException
     {
+        String threadId = String.valueOf(Thread.currentThread().getId());
+
+
         while (this.queue.size()==0)
         {
-            System.out.println("dequeue wait: queue size"+ this.queue.size());
+            System.out.println("dequeue "+threadId+" wait: queue size "+ this.queue.size());
             wait();
         }
 
-        System.out.println("dequeue:" + queue.get(0).toString());
+        System.out.println("dequeue "+threadId +" : " + queue.get(0).toString());
 
         this.queue.remove(0);
 
         notifyAll();
+    }
+
+    public int size(){
+        return this.queue.size();
     }
 
 }

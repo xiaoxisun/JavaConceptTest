@@ -1,6 +1,7 @@
 package Distributed;
 
 import java.util.Random;
+//import org.apache.log4j.*;
 
 /**
  * Created by terrysun on 11/28/16.
@@ -14,11 +15,12 @@ public class Consumer implements Runnable {
     }
 
     public void run(){
+        String threadId = String.valueOf(Thread.currentThread().getId());
 
         try {
             Random rand = new Random();
-            int x=rand.nextInt(100);
-            System.out.println("Consumer dequeue number: "+x);
+            int x=rand.nextInt(1000);
+            System.out.println("Consumer "+threadId +" dequeue number: "+x);
 
             for (int i=0;i<x;i++)
                 queue.dequeue();

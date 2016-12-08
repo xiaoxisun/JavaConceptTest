@@ -36,18 +36,29 @@ public class Main {
     }
 
 
-    public static void testBlockingQueue()
-    {
-        BlockingQueue queue=new BlockingQueue(10);
+    public static void testBlockingQueue() {
+        BlockingQueue queue = new BlockingQueue(300);
 
-        Producer producer=new Producer(queue);
-        Consumer consumer=new Consumer(queue);
+        Producer producer = new Producer(queue);
 
+        Consumer consumer = new Consumer(queue);
 
         new Thread(producer).start();
 
-        new Thread(consumer).start();
 
+        try {
+            Thread.currentThread().sleep(1000);
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        //for (int i=0;i<10;i++) {
+        while(queue.size()>0)  {
+
+            new Thread(consumer).start();
+        }
 
         try {
             System.in.read();
